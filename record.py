@@ -7,8 +7,8 @@ try:
 except ImportError:
     from serial3 import *  # Python3
 
-from stompest.config import StompConfig
-from stompest.sync import Stomp
+#from stompest.config import StompConfig
+#from stompest.sync import Stomp
 
 # def exit_handler():
 #     print 'My application is ending!'
@@ -23,34 +23,35 @@ print(os.getcwd())
 
 
 
-CONFIG = StompConfig('tcp://localhost:61613',login='admin', passcode='password')
+#CONFIG = StompConfig('tcp://localhost:61613',login='admin', passcode='password')
 #QUEUE = '/queue/test'
-QUEUE = '/topic/command'
+#QUEUE = '/topic/command'
 
 
-ser = serial.Serial('/dev/ttyACM0', 9600)
+#ser = serial.Serial('/dev/ttyACM0', 9600)
 
 
 def do_record(number_of_records=20):
-    client = Stomp(CONFIG)
-    client.connect()
+    #client = Stomp(CONFIG)
+    #client.connect()
     ser = serial.Serial('/dev/ttyACM0', 9600)
     target = open("out.csv", 'w')
     count=0
     ser.flushInput()
+    #ser.write('A')
     while count < number_of_records:
         # while True:
         count = count + 1
         text = ser.readline()
         print text
         print count
-        client.send(QUEUE, text)
+        #client.send(QUEUE, text)
         if (len(text.split(",")) == 4):
             target.write(text)
 
     target.close()
     ser.close()
-    client.disconnect()
+    #client.disconnect()
 
 def go():
     do_record()
