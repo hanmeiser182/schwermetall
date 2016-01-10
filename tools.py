@@ -7,9 +7,7 @@ def create_init_file():
 
 def getModelParamsFromName():
   create_init_file()
-  importName = "model_0.model_params" #% (
-    #gymName.replace(" ", "_").replace("-", "_")
-  #)
+  importName = "model_0.model_params"
   print "Importing model params from %s" % importName
   try:
     importedModelParams = importlib.import_module(importName).MODEL_PARAMS
@@ -27,7 +25,6 @@ def convert_csv():
         with open('out.csv', 'rb') as csvfile:
             spamreader = csv.reader(csvfile, delimiter=',', quotechar='"')
             for row in spamreader:
-                #print ', '.join(row)
                 eggwriter.writerow([row[0], row[1], row[2], row[3]])
         csvfile.close()
     egg.close()
